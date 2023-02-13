@@ -27,13 +27,8 @@ jobs:
     - name: show value
       run: echo ${{ steps.extract.outputs.PULL_NUMBER }}
       
-    - uses: octokit/request-action@v2.x
-      id: get_latest_release
-      with:
-        route: GET /repos/{owner}/{repo}/commits/{commit_sha}/pulls
-        owner: 'OWNER'
-        repo: 'REPO'
-        commit_sha: 'COMMIT_SHA'
+    - name: Dump github context
+      run:   echo "$GITHUB_CONTEXT"
+      shell: bash
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - run: "echo id: '${{ fromJson(steps.get_latest_release.outputs.data).number }}'"
+        GITHUB_CONTEXT: ${{ toJson(github) }}
