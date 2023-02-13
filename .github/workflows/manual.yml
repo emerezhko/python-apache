@@ -16,4 +16,4 @@ jobs:
       shell: bash
       id: extract
     - name: show value
-      run: echo ${{ id.extract.outputs.PULL_NUMBER }}
+      run: echo ${{ steps.extract.outputs.PULL_NUMBER }}
