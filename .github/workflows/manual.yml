@@ -16,6 +16,9 @@ jobs:
     # Runs a single command using the runners shell
     - name: test
       run: echo "$GITHUB_PR_NUMBER"
+      
+    - name: git event path
+      run: echo "$GITHUB_EVENT_PATH"
     - name: run echo
       run: echo "$GITHUB_REF"
     - name: run echo2 
