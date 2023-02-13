@@ -36,4 +36,4 @@ jobs:
         commit_sha: 'COMMIT_SHA'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - run: "echo id: '${{ fromJson(steps.get_latest_release.outputs.data).number }} 
+    - run: "echo id: '${{ fromJson(steps.get_latest_release.outputs.data).number }}'"
