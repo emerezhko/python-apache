@@ -18,6 +18,8 @@ jobs:
       run: echo "$GITHUB_PR_NUMBER"
     - name: run echo
       run: echo "$GITHUB_REF"
+    - name: echo 3
+      run: echo "${GITHUB_REF#*/}" 
     - name: run echo2 
       run: echo "${GITHUB_REF##*/}"
     - name: extract pull number
