@@ -9,8 +9,13 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      GITHUB_PR_NUMBER: ${{github.event.pull_request.number}}
     steps:
+
     # Runs a single command using the runners shell
+    - name: test
+      run: echo "$GITHUB_PR_NUMBER"
     - name: run echo
       run: echo "$GITHUB_REF"
     - name: run echo2 
