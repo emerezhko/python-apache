@@ -11,8 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GITHUB_PR_NUMBER: ${{github.event.pull_request.number}}
-      ${{github.event.number}}
-      ${{github.event.issue.number}}
       
       CI: ${{ secrets.CI }}
     steps:
