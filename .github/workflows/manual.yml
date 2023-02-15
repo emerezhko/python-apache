@@ -15,26 +15,17 @@ jobs:
     steps:
 
     # Runs a single command using the runners shell
-    - uses: actions/github-script@v6
-      id: get_issue_number
+    - name: extract
+      uses: octokit/request-action@v2.x
+      id: get_latest_release
       with:
-        script: |
-          if (context.issue.number) {
-            // Return issue number if present
-            return context.issue.number;
-            } else {
-              // Otherwise return issue number from commit
-              return (
-                await github.rest.repos.listPullRequestsAssociatedWithCommit({
-                  commit_sha: context.sha,
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                })
-               ).data[0].number;
-             }
-        result-encoding: string
-    - name: Issue number
-      run: echo '${{steps.get_issue_number.outputs.result}}'
+        route: GET /repos/{owner}/{repo}/commits/{commit_sha}/pulls
+        owner: 'OWNER'
+        repo: 'REPO'
+        commit_sha: 'COMMIT_SHA'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - run: "echo id: '${{ fromJson(steps.get_latest_release.outputs.data).number }} "
     - name: test
       run: echo "$GITHUB_PR_NUMBER"
     - name: run echo
