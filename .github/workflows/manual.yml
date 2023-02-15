@@ -11,10 +11,19 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GITHUB_PR_NUMBER: ${{github.event.pull_request.number}}
+      ${{github.event.number}}
+      ${{github.event.issue.number}}
+      
       CI: ${{ secrets.CI }}
     steps:
 
     # Runs a single command using the runners shell
+    - name: test333
+      run: |
+        echo "2222"
+        echo ${{github.event.number}}
+        echo "1111"
+        echo ${{github.event.issue.number}}
     - name: extract
       uses: octokit/request-action@v2.x
       id: get_latest_release
