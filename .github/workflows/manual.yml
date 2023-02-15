@@ -45,7 +45,7 @@ jobs:
       shell: bash
       env:
         GITHUB_CONTEXT: ${{ toJson(github) }}
-    - name: test
+    - name: test 
       run: |
         curl \
            -H "Accept: application/vnd.github+json" \
