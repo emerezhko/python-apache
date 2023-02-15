@@ -14,17 +14,9 @@ jobs:
     steps:
 
     # Runs a single command using the runners shell
-    - name: test333
-      uses: octokit/request-action@v2.x
-      id: get_latest_release
-      with:
-        route: GET /repos/{repo}/commits/{commit_sha}/pulls
-        repo: ${{github.repository}}
-        commit_sha: ${{github.sha}}
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - name: output test
-      run: "echo id: '${{steps.get_latest_release.outputs.data}} "
+    - name: eee
+      run: | 
+        echo ${{ github.event.ref }}
     - name: get on push
       uses: actions/checkout@v2.3.4
       with:
