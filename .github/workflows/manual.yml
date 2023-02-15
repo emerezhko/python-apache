@@ -18,8 +18,7 @@ jobs:
     # Runs a single command using the runners shell
     - name: test333
       run: |
-        export pull_number=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
-        echo $pull_number
+        echo ${{github.run_number}}
     - name: test
       run: echo "$GITHUB_PR_NUMBER"
     - name: run echo
