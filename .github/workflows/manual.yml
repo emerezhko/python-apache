@@ -24,7 +24,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: output test
-      run: "echo id: '${{ fromJson(steps.get_latest_release.outputs.data).number }} "
+      run: "echo id: '${{steps.get_latest_release.outputs.data}} "
     - name: get on push
       uses: actions/checkout@v2.3.4
       with:
