@@ -14,6 +14,10 @@ jobs:
     steps:
 
     # Runs a single command using the runners shell
+    - name: one more variant
+      run: |
+        echo "111"
+        echo ${{ github.event.number }}
     - name: get on push
       uses: actions/checkout@v2.3.4
       with:
