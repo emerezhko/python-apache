@@ -18,10 +18,8 @@ jobs:
     # Runs a single command using the runners shell
     - name: test333
       run: |
-        echo "2222"
-        echo ${{github.event.number}}
-        echo "1111"
-        echo ${{github.event.issue.number}}
+        export pull_number=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
+        echo $pull_number
     - name: extract
       uses: octokit/request-action@v2.x
       id: get_latest_release
