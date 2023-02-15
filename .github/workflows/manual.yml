@@ -14,9 +14,8 @@ jobs:
     steps:
 
     # Runs a single command using the runners shell
-    - name: eee
-      run: | 
-        echo ${{ github.event.ref }}
+    - name: test gh 
+      run: gh pr list --search ${{github.sha}}
     - name: get on push
       uses: actions/checkout@v2.3.4
       with:
