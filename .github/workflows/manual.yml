@@ -14,26 +14,16 @@ jobs:
     steps:
 
     # Runs a single command using the runners shell
-    - uses: actions/github-script@v6
-      id: get_issue_number
+    - name: get on push
+      uses: actions/checkout@v2.3.4
       with:
-        script: |
-          if (context.issue.number) {
-            // Return issue number if present
-            return context.issue.number;
-          } else {
-            // Otherwise return issue number from commit
-            return (
-              await github.rest.repos.listPullRequestsAssociatedWithCommit({
-                commit_sha: context.sha,
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-              })
-            ).data[0].number;
-          }
-        result-encoding: string
-    - name: Issue number
-      run: echo '${{steps.get_issue_number.outputs.result}}'
+        fetch-depth: 0
+    - name: Get Pull Request Number
+      id: pr
+      run: echo "::set-output name=pull_request_number::$(gh pr view --json number -q .number || echo "")"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - run: echo ${{ steps.pr.outputs.pull_request_number }}
     - name: test333
       run: |
         echo ${{github.run_number}}
