@@ -15,6 +15,16 @@ jobs:
     steps:
 
     # Runs a single command using the runners shell
+    - name: Test
+      uses: actions/github-script@0.3.0
+      with:
+        github-token: ${{github.token}}
+        script: |
+          const core = require('@actions/core')
+          const prNumber = context.payload.number;
+          echo "{PULL_NUMBER}={prNumber}" >> $GITHUB_ENV
+    - name: test2
+      run: echo ${{env.PULL_NUMBER}}
     - name: test
       run: echo "$GITHUB_PR_NUMBER"
     - name: run echo
