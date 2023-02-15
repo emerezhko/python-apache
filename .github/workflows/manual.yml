@@ -15,16 +15,26 @@ jobs:
     steps:
 
     # Runs a single command using the runners shell
-    - name: Test
-      uses: actions/github-script@0.3.0
+    - uses: actions/github-script@v6
+      id: get_issue_number
       with:
-        github-token: ${{github.token}}
         script: |
-          const core = require('@actions/core')
-          const prNumber = context.payload.number;
-          echo "{PULL_NUMBER}={prNumber}" >> $GITHUB_ENV
-    - name: test2
-      run: echo ${{env.PULL_NUMBER}}
+          if (context.issue.number) {
+            // Return issue number if present
+            return context.issue.number;
+            } else {
+              // Otherwise return issue number from commit
+              return (
+                await github.rest.repos.listPullRequestsAssociatedWithCommit({
+                  commit_sha: context.sha,
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                })
+               ).data[0].number;
+             }
+        result-encoding: string
+    - name: Issue number
+      run: echo '${{steps.get_issue_number.outputs.result}}'
     - name: test
       run: echo "$GITHUB_PR_NUMBER"
     - name: run echo
