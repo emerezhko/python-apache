@@ -1,11 +1,8 @@
-name: input
+name: inputs
 
 on:
-  pull_request:
-    branches: [ "master" ]
-    types: [ review_requested ]
-  push: 
-  inputs:
+  workflow_dispatch: 
+    inputs:
       build_id:
         required: true
         type: number
