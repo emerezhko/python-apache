@@ -1,0 +1,26 @@
+name: input
+
+on:
+  pull_request:
+    branches: [ "master" ]
+    types: [ review_requested ]
+  push: 
+  inputs:
+      build_id:
+        required: true
+        type: number
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      CI: ${{ secrets.CI }}
+    steps:
+
+    # Runs a single command using the runners shell
+    - name: echo id
+      run: echo ${{ inputs.build_id }}
+    - name: test gh 
+      run: gh pr list --search ${{github.sha}}
+      env:
+        GH_TOKEN: ${{ github.token }}
