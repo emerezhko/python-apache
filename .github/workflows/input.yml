@@ -17,6 +17,8 @@ jobs:
     # Runs a single command using the runners shell
     - name: echo id
       run: echo "${{ inputs.build_id }}"
+    - name: checkout
+      uses: actions/checkout@v3
     - name: test gh 
       run: gh pr checkout "${{ inputs.build_id }}"
       env:
