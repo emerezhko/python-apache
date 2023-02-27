@@ -10,9 +10,6 @@ jobs:
       CI: ${{ secrets.CI }}
     steps:
 
-
- steps:
-
     - name: 'Cleanup build folder'
       run: |
         ls -la ./
